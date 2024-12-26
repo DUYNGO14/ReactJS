@@ -1,4 +1,4 @@
 import ModalBlank from "./ModalBlank";
 import * as ModalDetail from "./ModalDetail";
-
-export { ModalBlank, ModalDetail };
+import * as ModalCreate from "./ModalCreate";
+export { ModalBlank, ModalDetail, ModalCreate };
