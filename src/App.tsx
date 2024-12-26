@@ -1,10 +1,11 @@
 import './App.css'
-import { User } from './pages'
+import { Resource, User } from './pages'
 
 function App() {
   return (
     <>
      <User/>
+     <Resource/>
     </>
   )
 }

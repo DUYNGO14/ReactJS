@@ -1,3 +1,3 @@
 import User from "./User";
-
-export { User };
+import Resource from "./Resource";
+export { User, Resource };

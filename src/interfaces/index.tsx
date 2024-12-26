@@ -1,3 +1,3 @@
 import * as IUser from "./User";
-
-export { IUser };
+import * as IResource from "./Resource";
+export { IUser, IResource };
