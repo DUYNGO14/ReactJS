@@ -2,7 +2,7 @@ import { IUser } from "../../../../../interfaces";
 import { Box, Button } from "../../../../Atoms";
 import ModalBlank from "../../ModalBlank";
 interface ModalUserDetailProps {
-  user : IUser.UserResponse
+  user : IUser.UserResponse | unknown
   isShow: boolean;
   toggle: (typeModal: string) => void
 }

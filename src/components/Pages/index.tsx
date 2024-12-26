@@ -1,3 +1,4 @@
 import UserPage from "./User";
 import ResourcePage from "./Resource";
-export { UserPage, ResourcePage };
+import HomePage from "./Home";
+export { UserPage, ResourcePage, HomePage };

@@ -1,7 +1,7 @@
 import { IUser } from "../../../../interfaces"
 import UserFormContainer from "./container"
 interface UserFormContainerProps{
-    userData? : IUser.UserResponse
+    userData? : IUser.UserResponse | unknown
        toggle: () => void
        setUsers : React.Dispatch<React.SetStateAction<IUser.UserResponse[]>>
        method ?: string
