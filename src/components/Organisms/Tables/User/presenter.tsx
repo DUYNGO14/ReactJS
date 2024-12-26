@@ -2,7 +2,7 @@
 import { ToastContainer } from "react-toastify";
 import { IUser } from "../../../../interfaces"
 import { Box, Button } from "../../../Atoms"
-import { ModalDetail, ModalCreate } from "../../Modal";
+import { ModalDetail, ModalCreate, ModalUpdate } from "../../Modal";
 
 
 interface UserPresenterProps {
@@ -112,8 +112,8 @@ const TableUserPresenter : React.FC<UserPresenterProps> = ({ users, isShow, togg
             <ToastContainer />
              {typeModal === "view" && <ModalDetail.ModalUserDetail user={user} isShow={isShow} toggle={toggle} />}
             {typeModal == "create" && <ModalCreate.ModalCreateUser isShow={isShow} toggle={toggle} setUsers={setUsers}/>}
-            {/*{typeModal == "update" && <ModalUpdate.ModalUpadteUser userData={user} isShow={isShow} toggle={toggle} setUsers={setUsers} />}
-            {typeModal == "delete" && <ModalDelete.ModalDeleteUser user={user} isShow={isShow} toggle={toggle} setUsers={setUsers}  />} */}
+            {typeModal == "update" && <ModalUpdate.ModalUpadteUser userData={user} isShow={isShow} toggle={toggle} setUsers={setUsers} />}
+            {/*{typeModal == "delete" && <ModalDelete.ModalDeleteUser user={user} isShow={isShow} toggle={toggle} setUsers={setUsers}  />} */}
         </>
     )
 }
