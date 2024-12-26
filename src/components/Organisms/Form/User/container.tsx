@@ -17,29 +17,30 @@ const DEFAULT_USER_VALUE: IUser.UserRequest = {
   
 const UserFormContainer : React.FC<UserFormProps> = ({ toggle, userData, setUsers ,method}) => {
     const [user, setUser] = useState<IUser.UserRequest>(DEFAULT_USER_VALUE);
+    const [id, setId] = useState<number>(0);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setUser((prev) => ({ ...prev, [name]: value }));
     };
     useEffect(() => {
         if(userData) {
-            handleChange({target: {name: 'name', value: userData?.first_name}} as React.ChangeEvent<HTMLInputElement>);
+            handleChange({target: {name: 'name', value: (userData as unknown as IUser.UserResponse).first_name}} as React.ChangeEvent<HTMLInputElement>);
         }
     },[userData])
     const handleSubmit = async () => {
         if(method === 'update') {
-            const res = await UserService.update(+userData.id, user);
-            console.log(res);
+            setId((userData as unknown as IUser.UserResponse).id);
+            const res = await UserService.update(id, user) as unknown as IUser.UserUpdateResponse;
             if(res && res.updatedAt) {
-                setUsers((prev) => prev.map((item) => item.id === userData.id ? {...item, first_name: user.name} : item));
+                setUsers((prev) => prev.map((item) => item.id === id ? {...item, first_name: user.name} : item));
                 toggle();
-                ToastUtils.success(`Update user with id:  ${userData.id} successfully`);
+                ToastUtils.success(`Update user with id:  ${id} successfully`);
             }else{
                 ToastUtils.error('Update user failed');
             }
         }
         else if(method === 'create') {
-            const res = await UserService.create(user);
+            const res = await UserService.create(user) as unknown as IUser.UserCreateResponse;
             console.log(res);
             if(res && res.id) {
                 const newUser = {id:res.id, email:`${res.name}_${res.job}@gmail.com`, first_name:res.name, last_name:res.name, avatar:"https://flowbite.com/docs/images/people/profile-picture-3.jpg"}

@@ -7,13 +7,14 @@ interface ModalUserDetailProps {
   toggle: (typeModal: string) => void
 }
 const ModalUserDetail = ({ user, isShow, toggle }: ModalUserDetailProps) => {
+    const userDB = user as IUser.UserResponse;
     return (
         <ModalBlank title="User Detail" isShow={isShow} toggle={toggle}>
           <Box>
-            <img src={user.avatar} className="w-20 h-20 rounded-full mx-auto" />
-            <p className="text-center text-base text-gray-600">First Name: {user.first_name}  </p>
-            <p className="text-center text-base text-gray-600">Last Name: {user.last_name} </p>
-            <p className="text-center text-base text-gray-600">Email: {user.email} </p>
+            <img src={userDB.avatar} className="w-20 h-20 rounded-full mx-auto" />
+            <p className="text-center text-base text-gray-600">First Name: {userDB.first_name}  </p>
+            <p className="text-center text-base text-gray-600">Last Name: {userDB.last_name} </p>
+            <p className="text-center text-base text-gray-600">Email: {userDB.email} </p>
           </Box>
           <Box className="flex justify-end">
               <Button

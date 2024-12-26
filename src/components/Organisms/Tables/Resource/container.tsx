@@ -20,7 +20,7 @@ const TableResourceContainer = () => {
     },[page])
 
     useEffect(() => {
-        getResourceById(resource)
+        getResourceById((resource as IResource.ResourceResponse))
     },[])
     const getAllResources = async () => {
         const res = await ResourceService.getAll(page)  as unknown as IPage.PageResult<IResource.ResourceResponse>

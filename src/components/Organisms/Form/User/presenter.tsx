@@ -2,14 +2,14 @@ import { IUser } from "../../../../interfaces"
 import { Box, Button, Input, Label } from "../../../Atoms"
 
 interface UserFormProps {
-    user? : IUser.UserRequest
+    user : IUser.UserRequest
     toggle: () => void
-    setUsers : React.Dispatch<React.SetStateAction<IUser.UserResponse[]>>
+    setUser : React.Dispatch<React.SetStateAction<IUser.UserRequest>>
     handleSubmit: () => void;
     handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
 }
 
-const UserFormPresenter = ({user, toggle, handleChange, handleSubmit}: UserFormProps) => {
+const UserFormPresenter : React.FC<UserFormProps> = ({user, toggle, handleChange, handleSubmit}) => {
     return (
     <form className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-' >
         <Box className="grid gap-4 mb-4 sm:grid-cols-1">
@@ -19,7 +19,7 @@ const UserFormPresenter = ({user, toggle, handleChange, handleSubmit}: UserFormP
                     type="text"
                     name="name"
                     placeholder="Name"
-                    value={user?.name??''}
+                    value={user.name}
                     onChange={handleChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
                 />
@@ -30,7 +30,7 @@ const UserFormPresenter = ({user, toggle, handleChange, handleSubmit}: UserFormP
                     type="text"
                     name="job"
                     placeholder="Job"
-                    value={user?.job??''}
+                    value={user.job}
                     onChange={handleChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
                 />
