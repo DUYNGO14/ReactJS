@@ -24,7 +24,6 @@ const TableResourceContainer = () => {
     },[])
     const getAllResources = async () => {
         const res = await ResourceService.getAll(page)  as unknown as IPage.PageResult<IResource.ResourceResponse>
-        console.log("PageResult:",res)
         if(res && res.data) {
             setResources(res.data)
             setPage(res.page)
