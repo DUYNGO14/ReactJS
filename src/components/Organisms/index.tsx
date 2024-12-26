@@ -1,3 +1,3 @@
 import * as Table from "./Tables";
-
-export { Table };
+import * as Modal from "./Modal";
+export { Table, Modal };
