@@ -12,7 +12,7 @@ interface ModalCreateProps {
 const ModalUpadteUser = ({ isShow, toggle, userData,setUsers }: ModalCreateProps) => {
     return (
         <ModalBlank title="Update User" isShow={isShow} toggle={toggle}>
-          {userData && userData.id ?(
+          {userData && (userData as IUser.UserResponse).id ?(
               <UserForm toggle={toggle}  userData={userData} method="update" setUsers={setUsers}/>
           ):(
             <Box className="text-center text-base text-gray-600">User not found!</Box>

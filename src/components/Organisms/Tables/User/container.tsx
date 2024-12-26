@@ -35,7 +35,7 @@ const TableUserContainer = () => {
       if(res && res.data && res.data.id) {
         setUser(res.data)
       }else if(res.status === 404) {
-        return ToastUtils.error('User not found')
+        return ToastUtils.error('User not found! Please reload page!')
       }else{
         ToastUtils.error('Error')
       }

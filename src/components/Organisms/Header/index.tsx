@@ -61,8 +61,8 @@ const Header=()=>{
                         ) : (
                             <>
                            
-                            <Paragraph className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-full md:inline-flex" text={user.email} />
-                            <Link to="/" onClick={handleLogout} className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-full md:inline-flex">
+                            <Paragraph className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-blue-800 hover:bg-green-700 active:bg-gray-900 rounded-full md:inline-flex" text={user.email} />
+                            <Link to="/" onClick={handleLogout} className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 hover:bg-green-700 active:bg-gray-900 rounded-full md:inline-flex">
                                     Logout
                             </Link>
                             </>

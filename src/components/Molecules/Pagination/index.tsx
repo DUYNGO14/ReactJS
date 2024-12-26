@@ -25,10 +25,9 @@ const Pagination : React.FC<Pagination> = ({ page, per_page, total, total_pages,
                                 <li key={idx}>
                                     <Button  
                                     onClick={() => setPage(item + 1)} aria-current={page == item ? "page" : false} 
-                                    className={`px-3 py-2 rounded-lg duration-150 hover:text-white  hover:bg-indigo-600 ${page-1 == item ? "bg-indigo-600 text-white font-medium" : ""}`}
+                                    className={`px-3 py-2 rounded-lg duration-150 hover:text-white border border-indigo-600  hover:bg-indigo-600 ${page-1 == item ? "bg-indigo-600 text-white font-medium" : ""}`}
                                     >{item + 1}</Button>
                                 </li>
-
                             ))
                         }
                     </ul>
