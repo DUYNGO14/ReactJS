@@ -2,7 +2,7 @@
 import { ToastContainer } from "react-toastify";
 import { IResource } from "../../../../interfaces"
 import { Box, Button } from "../../../Atoms"
-// import { ModalDetail } from "../../Modal";
+import { ModalDetail } from "../../Modal";
 
 
 interface UserPresenterProps {
@@ -62,7 +62,7 @@ const TableResourcePresenter = ({ resources, toggle, getResourceById, isShow,res
                         </tbody>
                     </table>
                 </Box>
-                {/* <ModalDetail.ModalResourceDetail isShow={isShow} toggle={toggle} resource={resource}/> */}
+                <ModalDetail.ModalResourceDetail isShow={isShow} toggle={toggle} resource={resource}/>
             </Box>
             <ToastContainer />
         </>

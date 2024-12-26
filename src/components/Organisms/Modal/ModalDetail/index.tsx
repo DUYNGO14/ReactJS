@@ -1,3 +1,3 @@
 import ModalUserDetail from "./User";
-
-export { ModalUserDetail };
+import ModalResourceDetail from "./Resource";
+export { ModalUserDetail, ModalResourceDetail };
