@@ -8,4 +8,7 @@ interface RegisterRequest {
     password: string;
 }
 
-export type { LoginRequest, RegisterRequest };
+interface BaseAuthResponse {
+    token: string
+}
+export type { LoginRequest, RegisterRequest, BaseAuthResponse };

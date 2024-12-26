@@ -1,4 +1,5 @@
 import User from "./User";
 import Resource from "./Resource";
 import Home from "./Home";
-export { User, Resource, Home };
+import Login from "./Login";
+export { User, Resource, Home, Login };

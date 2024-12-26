@@ -1,3 +1,3 @@
 import UserForm from "./User";
-
-export { UserForm };
+import LoginForm from "./Login";
+export { UserForm, LoginForm };

@@ -1,4 +1,5 @@
 import UserPage from "./User";
 import ResourcePage from "./Resource";
 import HomePage from "./Home";
-export { UserPage, ResourcePage, HomePage };
+import LoginPage from "./Login";
+export { UserPage, ResourcePage, HomePage, LoginPage };
