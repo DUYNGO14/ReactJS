@@ -14,7 +14,7 @@ const TableResourceContainer = () => {
     const [total, setTotal] = useState<number>(0)
     const [isShow , setIsShowing] = useState(false)
     const [resource, setResource] = useState<IResource.ResourceResponse|unknown>({})
-    
+    const [loading, setLoading] = useState<boolean>(false)
     useEffect(() => {
         getAllResources()
     },[page])
@@ -23,6 +23,7 @@ const TableResourceContainer = () => {
         getResourceById((resource as IResource.ResourceResponse))
     },[])
     const getAllResources = async () => {
+        setLoading(true)
         const res = await ResourceService.getAll(page)  as unknown as IPage.PageResult<IResource.ResourceResponse>
         if(res && res.data) {
             setResources(res.data)
@@ -33,6 +34,7 @@ const TableResourceContainer = () => {
         }else{
           ToastUtils.error('Error')
         }
+        setLoading(false)
     }
     
     const getResourceById = async (item: IResource.ResourceResponse) => {
@@ -51,7 +53,14 @@ const TableResourceContainer = () => {
       }
     return (
         <>
-            <TableResourcePresenter isShow={isShow} resources={resources} toggle={handleToggle} getResourceById={getResourceById} resource={resource}/>
+            <TableResourcePresenter 
+            isShow={isShow} 
+            resources={resources} 
+            toggle={handleToggle}
+            getResourceById={getResourceById} 
+            resource={resource} 
+            isLoading={loading}
+            />
             <Pagination page={page} per_page={per_page} total={total} total_pages={totalPage} setPage={setPage}/>
         </>
     )

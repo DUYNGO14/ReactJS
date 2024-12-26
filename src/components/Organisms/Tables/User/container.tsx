@@ -5,7 +5,6 @@ import { Pagination } from "../../../Molecules"
 import { ToastUtils } from "../../../../utils"
 import { IUser, IPage } from "../../../../interfaces"
 
-
 const TableUserContainer = () => {
     const [users, setUsers] = useState<IUser.UserResponse[]>([])
     const [page, setPage] = useState<number>(1)
@@ -23,20 +22,23 @@ const TableUserContainer = () => {
     }
     useEffect (() => {
        getAllUsers()
-    },[page])
-
+    },[page])   
+    
     useEffect (() => {
       handleViewUser((user as IUser.UserResponse));
     },[])
-    const handleViewUser = async (user: IUser.UserResponse) => {
-      await UserService.getById(+user.id).then((res) => {
-        if(res && res.data) {
-          setUser(res.data)
-        }else {
-          setIsShowing(false)
-          ToastUtils.error('User not found');
-        }
-      })
+    const handleViewUser =  async (user: IUser.UserResponse) => {
+      if(!user || !user.id) {
+        return 
+      }
+      const res =await UserService.getById(+user.id)
+      if(res && res.data && res.data.id) {
+        setUser(res.data)
+      }else if(res.status === 404) {
+        return ToastUtils.error('User not found')
+      }else{
+        ToastUtils.error('Error')
+      }
     }
 
     const getAllUsers = async () => {
@@ -49,7 +51,7 @@ const TableUserContainer = () => {
         setTotal(+res.total)
         setTotalPage(+res.total_pages)
       }else{
-        ToastUtils.error('Error')
+         ToastUtils.error('Error')
       }
       setLoading(false)
     }
@@ -65,7 +67,7 @@ const TableUserContainer = () => {
             setTypeModal={setTypeModal}
             setUsers={setUsers}
             isLoading={loading}
-          />
+            />
             <Pagination page={page} per_page={per_page} total={total} total_pages={totalPage} setPage={setPage}/>
         </>
     )

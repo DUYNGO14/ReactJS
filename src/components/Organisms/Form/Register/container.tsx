@@ -38,7 +38,7 @@ const RegisterContainer = () => {
             const response = await AuthService.register(user);
             console.log(response);
             if (response && (response as unknown as IAuth.RegisterResponse).id) {
-                // ToastUtils.success('Register successfully');
+                ToastUtils.success('Register successfully');
                 navigate("/login");
             }else{
                 if(response && response.status === 400) {
