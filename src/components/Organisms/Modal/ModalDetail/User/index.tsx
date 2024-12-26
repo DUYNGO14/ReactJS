@@ -10,7 +10,10 @@ const ModalUserDetail = ({ user, isShow, toggle }: ModalUserDetailProps) => {
     const userDB = user as IUser.UserResponse;
     return (
         <ModalBlank title="User Detail" isShow={isShow} toggle={toggle}>
-          <Box>
+          {userDB && userDB.id ? (
+            <>
+            <Box>
+            
             <img src={userDB.avatar} className="w-20 h-20 rounded-full mx-auto" />
             <p className="text-center text-base text-gray-600">First Name: {userDB.first_name}  </p>
             <p className="text-center text-base text-gray-600">Last Name: {userDB.last_name} </p>
@@ -24,7 +27,17 @@ const ModalUserDetail = ({ user, isShow, toggle }: ModalUserDetailProps) => {
               >
                   Cancle
               </Button>
+            </Box>  
+            </>
+          ) : (
+            <>
+            <Box className="text-center">
+              User not found in database.
             </Box>
+            </>
+          )
+          }
+          
         </ModalBlank>
       );
 }

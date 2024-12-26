@@ -19,7 +19,6 @@ interface UserPresenterProps {
 
 
 const TableUserPresenter : React.FC<UserPresenterProps> = ({ users, isShow, toggle, typeModal , userDetail,handleViewUser,setUsers, isLoading}) => {
-
     return (
         <>
             <Box className="max-w-screen-xl mx-auto px-4 md:px-8 mt-12">
@@ -33,29 +32,30 @@ const TableUserPresenter : React.FC<UserPresenterProps> = ({ users, isShow, togg
                         <Button onClick={() => {toggle("create") } } className="px-3 py-1.5 text-sm text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-700 active:shadow-lg">Add user</Button>
                     </Box>
                 </Box>
+                {users.length === 0 && !isLoading && (<div className="flex justify-center items-center h-64">No data</div>)}
                 {isLoading ? (
                     <div className="flex justify-center items-center h-64">
-                    <svg
-                        className="animate-spin h-10 w-10 text-indigo-600"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                    >
-                        <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                        ></circle>
-                        <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8v8H4z"
-                        ></path>
-                    </svg>
-                </div>
+                        <svg
+                            className="animate-spin h-10 w-10 text-indigo-600"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                            ></circle>
+                            <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8v8H4z"
+                            ></path>
+                        </svg>
+                    </div>
                 ):(
                     <Box className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
                     <table className="w-full table-auto text-sm text-left">
@@ -107,11 +107,10 @@ const TableUserPresenter : React.FC<UserPresenterProps> = ({ users, isShow, togg
                     </table>
                 </Box>
                 )}
-                
             </Box>
             <ToastContainer />
-             {typeModal === "view" && <ModalDetail.ModalUserDetail user={userDetail} isShow={isShow} toggle={toggle} />}
-            {typeModal == "create" && <ModalCreate.ModalCreateUser isShow={isShow} toggle={toggle} setUsers={setUsers}/>}
+            {typeModal === "view" && isShow && <ModalDetail.ModalUserDetail user={userDetail} isShow={isShow} toggle={toggle} />}
+            {typeModal == "create" && <ModalCreate.ModalCreateUser isShow={isShow} toggle={toggle} setUsers={setUsers} />}
             {typeModal == "update" && <ModalUpdate.ModalUpadteUser userData={userDetail} isShow={isShow} toggle={toggle} setUsers={setUsers} />}
             {typeModal == "delete" && <ModalDelete.ModalDeleteUser user={userDetail} isShow={isShow} toggle={toggle} setUsers={setUsers}  />}
         </>
