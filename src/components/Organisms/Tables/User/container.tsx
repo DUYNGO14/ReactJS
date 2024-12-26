@@ -3,11 +3,11 @@ import TableUserPresenter from "./presenter"
 import { UserService } from "../../../../services"
 import { Pagination } from "../../../Molecules"
 import { ToastUtils } from "../../../../utils"
-import { IUser } from "../../../../interfaces"
+import { IUser, IPage } from "../../../../interfaces"
 
 
 const TableUserContainer = () => {
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState<IUser.UserResponse[]>([])
     const [page, setPage] = useState<number>(1)
     const [per_page, setPerPage] = useState<number>(0)
     const [totalPage, setTotalPage] = useState<number>(0)
@@ -41,7 +41,7 @@ const TableUserContainer = () => {
 
     const getAllUsers = async () => {
       setLoading(true)
-      const res = await UserService.getAll(page)
+      const res = await UserService.getAll(page) as unknown as IPage.PageResult<IUser.UserResponse>
       if(res && res.data) {
         setUsers(res.data)
         setPage(+res.page)
@@ -61,7 +61,7 @@ const TableUserContainer = () => {
             toggle={handleToggle}
             handleViewUser={handleViewUser}
             typeModal={typeModal}
-            user = {user} 
+            userDetail = {user} 
             setTypeModal={setTypeModal}
             setUsers={setUsers}
             isLoading={loading}

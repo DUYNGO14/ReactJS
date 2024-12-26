@@ -1,11 +1,12 @@
+import { ToastContainer } from 'react-toastify'
 import './App.css'
-import { Resource, User } from './pages'
+import AppRouter from './routers'
 
 function App() {
   return (
     <>
-     <User/>
-     <Resource/>
+       <ToastContainer />
+       <AppRouter/>
     </>
   )
 }

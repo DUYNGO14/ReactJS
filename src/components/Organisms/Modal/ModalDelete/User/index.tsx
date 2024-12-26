@@ -6,7 +6,7 @@ import { Box, Button } from "../../../../Atoms";
 import { UserService } from "../../../../../services";
 
 interface ModalUserDetailProps {
-  user : IUser.UserResponse
+  user : IUser.UserResponse | unknown
   isShow: boolean;
   toggle: (typeModal: string) => void
   setUsers : React.Dispatch<React.SetStateAction<IUser.UserResponse[]>>

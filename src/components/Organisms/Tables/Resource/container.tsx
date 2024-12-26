@@ -3,18 +3,18 @@ import { ResourceService } from "../../../../services"
 import TableResourcePresenter from "./presenter"
 import { Pagination } from "../../../Molecules"
 import { ToastUtils } from "../../../../utils"
-import { IResource } from "../../../../interfaces"
+import { IResource,IPage } from "../../../../interfaces"
 
 
 const TableResourceContainer = () => {
-    const [resources, setResources] = useState([])
+    const [resources, setResources] = useState<IResource.ResourceResponse[]>([])
     const [page, setPage] = useState<number>(1)
     const [per_page, setPerPage] = useState<number>(0)
     const [totalPage, setTotalPage] = useState<number>(0)
     const [total, setTotal] = useState<number>(0)
     const [isShow , setIsShowing] = useState(false)
     const [resource, setResource] = useState<IResource.ResourceResponse|unknown>({})
-
+    
     useEffect(() => {
         getAllResources()
     },[page])
@@ -22,15 +22,15 @@ const TableResourceContainer = () => {
     useEffect(() => {
         getResourceById(resource)
     },[])
-
     const getAllResources = async () => {
-        const res = await ResourceService.getAll(page)
+        const res = await ResourceService.getAll(page)  as unknown as IPage.PageResult<IResource.ResourceResponse>
+        console.log("PageResult:",res)
         if(res && res.data) {
             setResources(res.data)
-            setPage(+res.page)
-            setPerPage(+res.per_page)
-            setTotal(+res.total)
-            setTotalPage(+res.total_pages)
+            setPage(res.page)
+            setPerPage(res.per_page)
+            setTotal(res.total)
+            setTotalPage(res.total_pages)
         }else{
           ToastUtils.error('Error')
         }
@@ -45,6 +45,7 @@ const TableResourceContainer = () => {
             ToastUtils.error('Error')
         }
     }
+   
     const handleToggle = () => {
         setIsShowing(!isShow)
         setResource({})

@@ -11,14 +11,14 @@ interface UserPresenterProps {
     toggle:(modalType?: string)=> void;
     handleViewUser: (user: IUser.UserResponse) => void
     typeModal: string;
-    user: IUser.UserResponse;
+    userDetail: IUser.UserResponse | unknown;
     setTypeModal: React.Dispatch<React.SetStateAction<string>>
     setUsers: React.Dispatch<React.SetStateAction<IUser.UserResponse[]>>
     isLoading: boolean
 }
 
 
-const TableUserPresenter : React.FC<UserPresenterProps> = ({ users, isShow, toggle, typeModal , user,handleViewUser,setUsers, isLoading}) => {
+const TableUserPresenter : React.FC<UserPresenterProps> = ({ users, isShow, toggle, typeModal , userDetail,handleViewUser,setUsers, isLoading}) => {
 
     return (
         <>
@@ -110,10 +110,10 @@ const TableUserPresenter : React.FC<UserPresenterProps> = ({ users, isShow, togg
                 
             </Box>
             <ToastContainer />
-             {typeModal === "view" && <ModalDetail.ModalUserDetail user={user} isShow={isShow} toggle={toggle} />}
+             {typeModal === "view" && <ModalDetail.ModalUserDetail user={userDetail} isShow={isShow} toggle={toggle} />}
             {typeModal == "create" && <ModalCreate.ModalCreateUser isShow={isShow} toggle={toggle} setUsers={setUsers}/>}
-            {typeModal == "update" && <ModalUpdate.ModalUpadteUser userData={user} isShow={isShow} toggle={toggle} setUsers={setUsers} />}
-            {typeModal == "delete" && <ModalDelete.ModalDeleteUser user={user} isShow={isShow} toggle={toggle} setUsers={setUsers}  />}
+            {typeModal == "update" && <ModalUpdate.ModalUpadteUser userData={userDetail} isShow={isShow} toggle={toggle} setUsers={setUsers} />}
+            {typeModal == "delete" && <ModalDelete.ModalDeleteUser user={userDetail} isShow={isShow} toggle={toggle} setUsers={setUsers}  />}
         </>
     )
 }

@@ -5,7 +5,7 @@ import { ToastUtils } from '../../../../utils';
 import UserFormPresenter from './presenter';
 
 interface UserFormProps {
-    userData? : IUser.UserResponse
+    userData : IUser.UserResponse | unknown
     toggle: () => void
     setUsers : React.Dispatch<React.SetStateAction<IUser.UserResponse[]>>
     method ?: string
@@ -21,10 +21,9 @@ const UserFormContainer : React.FC<UserFormProps> = ({ toggle, userData, setUser
         const { name, value } = e.target;
         setUser((prev) => ({ ...prev, [name]: value }));
     };
-    console.log(userData);
     useEffect(() => {
         if(userData) {
-            handleChange({target: {name: 'name', value: userData.first_name}} as React.ChangeEvent<HTMLInputElement>);
+            handleChange({target: {name: 'name', value: userData?.first_name}} as React.ChangeEvent<HTMLInputElement>);
         }
     },[userData])
     const handleSubmit = async () => {
