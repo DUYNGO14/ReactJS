@@ -1,3 +1,3 @@
 import useAuth from "./useAuth";
-
-export { useAuth };
+import useOffline from "./useOffline";
+export { useAuth, useOffline };
