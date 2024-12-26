@@ -4,9 +4,12 @@ import { AuthService } from "../../../../services"
 import { ToastUtils } from "../../../../utils"
 import { useNavigate } from "react-router"
 import RegisterPresenter from "./presenter"
-
+const DEFAULT_REGISTER_VALUE: IAuth.RegisterRequest = {
+    email: '',
+    password: '',
+  };
 const RegisterContainer = () => {
-    const [user, setUser] = useState<IAuth.RegisterRequest>({});
+    const [user, setUser] = useState<IAuth.RegisterRequest>(DEFAULT_REGISTER_VALUE);
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const  navigate = useNavigate();
@@ -33,7 +36,8 @@ const RegisterContainer = () => {
         setLoading(true);
         try {
             const response = await AuthService.register(user);
-            if (response && response.id) {
+            console.log(response);
+            if (response && (response as unknown as IAuth.RegisterResponse).id) {
                 // ToastUtils.success('Register successfully');
                 navigate("/login");
             }else{
@@ -41,9 +45,8 @@ const RegisterContainer = () => {
                     setErrorMessage("Email is already in use 🤔");
                 }
             }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         }catch (error) {
-            ToastUtils.error('An error occurred during register 😩');
+            ToastUtils.error(`An error occurred during register ${error} 😩`);
         }finally {
             setLoading(false);
         }

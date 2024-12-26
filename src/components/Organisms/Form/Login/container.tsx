@@ -29,10 +29,9 @@ const LoginContainer = () => {
         }
         setLoading(true);
         try {
-            const response = await AuthService.login(user);
-            console.log(response);
-            if (response && response.token) {
-                handleLogin(user, response.token);
+            const response = await AuthService.login(user) ;
+            if (response && (response as unknown as IAuth.BaseAuthResponse).token ) {
+                handleLogin(user, (response as unknown as IAuth.BaseAuthResponse).token);
                 // ToastUtils.success('Welcome back✌!');
             } else {
                 if (response && response.status === 400) {

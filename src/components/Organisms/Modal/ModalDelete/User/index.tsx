@@ -11,7 +11,7 @@ interface ModalUserDetailProps {
   toggle: (typeModal: string) => void
   setUsers : React.Dispatch<React.SetStateAction<IUser.UserResponse[]>>
 }
-const ModalDeleteUser = ({ user, isShow, toggle ,setUsers }: ModalUserDetailProps) => {
+const ModalDeleteUser : React.FC<ModalUserDetailProps> = ({ user, isShow, toggle ,setUsers }) => {
     useEffect (() => {
         handleDelete(user.id);
     },[])

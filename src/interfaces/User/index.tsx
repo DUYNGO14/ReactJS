@@ -5,10 +5,20 @@ interface UserResponse {
     last_name: string;
     avatar: string;
 }
-
 interface UserRequest {
     name: string;
     job: string;
 }
+interface UserCreateResponse {
+    id: number;
+    name: string;
+    job: string;
+    createdAt: string;
+}
 
-export type { UserResponse, UserRequest };
+interface UserUpdateResponse {
+    name: string;
+    job: string;
+    updatedAt: string;
+}
+export type { UserResponse, UserRequest, UserCreateResponse, UserUpdateResponse };

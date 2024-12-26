@@ -7,13 +7,14 @@ interface ModalUserDetailProps {
   toggle: (typeModal: string) => void
 }
 const ModalResourceDetail : React.FC<ModalUserDetailProps> = ({ resource, isShow, toggle }) => {
+    const resourceDB = resource as IResource.ResourceResponse;
     return (
         <ModalBlank title="Resource Detail" isShow={isShow} toggle={toggle}>
           <Box>
-            <p className="text-center text-base text-gray-600">Name: {resource.name}  </p>
-            <p className="text-center text-base text-gray-600">Year: {resource.year} </p>
-            <p className="text-center text-base text-gray-600">Color: <input disabled type="color" value={resource.color} className="w-20" /> </p>
-            <p className="text-center text-base text-gray-600">Pantone Value: {resource.pantone_value} </p>
+            <p className="text-center text-base text-gray-600">Name: {resourceDB.name}  </p>
+            <p className="text-center text-base text-gray-600">Year: {resourceDB.year} </p>
+            <p className="text-center text-base text-gray-600">Color: <input disabled type="color" value={resourceDB.color} className="w-20" /> </p>
+            <p className="text-center text-base text-gray-600">Pantone Value: {resourceDB.pantone_value} </p>
           </Box>
           <Box className="flex justify-end">
               <Button

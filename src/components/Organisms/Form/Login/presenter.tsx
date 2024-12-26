@@ -9,7 +9,6 @@ interface LoginPresenterProps {
     error: string
 }
 const LoginPresenter : React.FC<LoginPresenterProps> = ({onSubmit, handleChange, user,loading,error}) => {
-    console.log(error);
     return (
     <>  
         <main className="w-full flex flex-col items-center justify-center">

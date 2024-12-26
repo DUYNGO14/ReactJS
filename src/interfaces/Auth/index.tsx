@@ -11,4 +11,8 @@ interface RegisterRequest {
 interface BaseAuthResponse {
     token: string
 }
-export type { LoginRequest, RegisterRequest, BaseAuthResponse };
+
+interface RegisterResponse extends BaseAuthResponse {
+    id: number
+}
+export type { LoginRequest, RegisterRequest, BaseAuthResponse,RegisterResponse };
