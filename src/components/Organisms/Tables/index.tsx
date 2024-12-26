@@ -1,3 +1,3 @@
 import TableUser from "./User";
-
-export { TableUser };
+import TableResource from "./Resource";
+export { TableUser, TableResource };

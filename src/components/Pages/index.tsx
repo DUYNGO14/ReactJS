@@ -1,3 +1,3 @@
 import UserPage from "./User";
-
-export { UserPage };
+import ResourcePage from "./Resource";
+export { UserPage, ResourcePage };
