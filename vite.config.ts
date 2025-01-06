@@ -4,6 +4,9 @@ import { generateSW } from 'workbox-build';
 
 // Cấu hình Vite
 export default defineConfig({
+  server: {
+    port: 3000,
+  },
   build: {
     outDir: 'dist',
   },
@@ -50,5 +53,10 @@ export default defineConfig({
       },
     },
   ],
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  }
 });
 

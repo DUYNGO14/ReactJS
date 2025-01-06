@@ -1,8 +1,8 @@
 import { Box, Button, Paragraph } from "../../Atoms";
 import {  Link } from "react-router";
 import { useState } from "react";
-import { useAuth } from "../../../hooks";
-import { IContext } from "../../../interfaces";
+import { useAuth } from "@/hooks";
+import { IContext } from "@/interfaces";
 const Header=()=>{
     const [state, setState] = useState(false)
     const { user, handleLogout}= useAuth() as unknown as IContext.UseAuthReturnType
@@ -10,7 +10,6 @@ const Header=()=>{
         { title: "User", to: "/users" },
         { title: "Resources", to : "/resources" },
     ]
-
     return (
         <>
         <nav className={`bg-white pb-5 md:text-sm border-b-2 border-indigo-200 ${state ? "shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0" : ""}`}>

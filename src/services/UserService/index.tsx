@@ -1,6 +1,6 @@
 import axios from "../customize-axios";
-import { PAGINATION_CONSTANTS } from "../../constants"
-import { IUser } from "../../interfaces";
+import { PAGINATION_CONSTANTS } from "@/constants"
+import { IUser } from "@/interfaces";
 
 const UserService = {
     getAll: async (page: number) => {

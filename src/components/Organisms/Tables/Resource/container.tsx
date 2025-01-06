@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { ResourceService } from "../../../../services"
+import { ResourceService } from "@/services"
 import TableResourcePresenter from "./presenter"
-import { Pagination } from "../../../Molecules"
-import { ToastUtils } from "../../../../utils"
-import { IResource,IPage } from "../../../../interfaces"
+import { Pagination } from "@/components/Molecules"
+import { ToastUtils } from "@/utils"
+import { IResource,IPage } from "@/interfaces"
 
 
 const TableResourceContainer = () => {
@@ -27,7 +27,7 @@ const TableResourceContainer = () => {
         const res = await ResourceService.getAll(page)  as unknown as IPage.PageResult<IResource.ResourceResponse>
         if(res && res.data) {
             setResources(res.data)
-            setPage(res.page)
+            setPage(res.page)          
             setPerPage(res.per_page)
             setTotal(res.total)
             setTotalPage(res.total_pages)
@@ -55,10 +55,10 @@ const TableResourceContainer = () => {
         <>
             <TableResourcePresenter 
             isShow={isShow} 
-            resources={resources} 
+            resources={resources}
             toggle={handleToggle}
-            getResourceById={getResourceById} 
-            resource={resource} 
+            getResourceById={getResourceById}
+            resource={resource}
             isLoading={loading}
             />
             <Pagination page={page} per_page={per_page} total={total} total_pages={totalPage} setPage={setPage}/>

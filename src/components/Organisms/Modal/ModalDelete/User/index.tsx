@@ -19,11 +19,10 @@ const ModalDeleteUser : React.FC<ModalUserDetailProps> = ({ user, isShow, toggle
 
     const handleDelete = (id: number) => {
         if(!id) return
-        
         UserService.delete(id).then(() => {
             ToastUtils.success('Delete user with id : ' + id + ' successfully');
             setUsers((prev) => prev.filter((item) => item.id !== id));
-            toggle('');
+            toggle('');    
         })
     }
     return (
@@ -55,7 +54,6 @@ const ModalDeleteUser : React.FC<ModalUserDetailProps> = ({ user, isShow, toggle
             ): (
                 <Box className="text-center text-base text-gray-600">User not found!</Box>
             )}
-            
         </ModalBlank>
       );
 }
