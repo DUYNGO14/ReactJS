@@ -6,7 +6,7 @@ import ModalBlank from "../../ModalBlank";
 interface ModalCreateProps {
   isShow: boolean;
   toggle: (typeModal?: string) => void;
-  userData?: IUser.UserResponse | unknown;
+  userData?: IUser.UserResponse | null;
   setUsers: React.Dispatch<React.SetStateAction<IUser.UserResponse[]>>;
 }
 const ModalUpadteUser = ({
