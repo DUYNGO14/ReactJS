@@ -13,6 +13,7 @@ interface BaseAuthResponse {
 }
 
 interface RegisterResponse extends BaseAuthResponse {
+    status: number;
     id: number
 }
 export type { LoginRequest, RegisterRequest, BaseAuthResponse,RegisterResponse };

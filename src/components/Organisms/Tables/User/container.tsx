@@ -4,59 +4,86 @@ import { UserService } from "@/services";
 import { Pagination } from "@/components/Molecules";
 import { ToastUtils } from "@/utils";
 import { IUser, IPage } from "@/interfaces";
+import { usePagination } from "@/hooks";
+
 
 const TableUserContainer = () => {
   const [users, setUsers] = useState<IUser.UserResponse[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [per_page, setPerPage] = useState<number>(0);
-  const [totalPage, setTotalPage] = useState<number>(0);
-  const [total, setTotal] = useState<number>(0);
+  const { page, setPage, per_page, setPerPage, total, setTotal, totalPage, setTotalPage } = usePagination();
   const [isShow, setIsShowing] = useState(false);
-  const [user, setUser] = useState<IUser.UserResponse | unknown>({});
+  const [user, setUser] = useState<IUser.UserResponse | null>(null);
   const [typeModal, setTypeModal] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  
+  const [loadingState, setLoadingState] = useState({
+    loading: false,
+    loadingModal: false,
+  });
+  console.log(loadingState);
+
   const handleToggle = (modalType?: string) => {
     setTypeModal(modalType || "");
     setIsShowing(!isShow);
-    setUser({});
+    if (modalType !== "view") setUser(null);
   };
+  
   useEffect(() => {
-    getAllUsers();
+    const fetchUsers = setTimeout(() => {
+      getAllUsers();
+    }, 300); // Đợi 300ms trước khi gọi API
+
+    return () => clearTimeout(fetchUsers); // Hủy debounce khi `page` thay đổi nhanh
   }, [page]);
 
   useEffect(() => {
-    handleViewUser(user as IUser.UserResponse);
+    if (user && (user as IUser.UserResponse).id) {
+      handleViewUser(user as IUser.UserResponse);
+    }
   }, []);
+
   const handleViewUser = async (user: IUser.UserResponse) => {
     if (!user || !user.id) {
       return;
     }
-    const res = await UserService.getById(+user.id);
-    if (res && res.data && res.data.id) {
-      setUser(res.data);
-    } else if (res.status === 404) {
-      return ToastUtils.error("User not found! Please reload page!");
-    } else {
-      ToastUtils.error("Error");
+    try {
+      setLoadingState((prev) => ({ ...prev, loadingModal: true }));
+      const res = await UserService.getById(+user.id);
+      if (res && res.data && res.data.id) {
+        setUser(res.data);
+      } else if (res.status === 404) {
+        return ToastUtils.error("User not found! Please reload page!");
+      } else {
+        ToastUtils.error("Error");
+      }
+    } catch {
+      ToastUtils.error("An error occurred while fetching user.");
+    } finally {
+      setLoadingState((prev) => ({ ...prev, loadingModal: false }));
     }
   };
 
   const getAllUsers = async () => {
-    setLoading(true);
-    const res = (await UserService.getAll(
-      page
-    )) as unknown as IPage.PageResult<IUser.UserResponse>;
-    if (res && res.data) {
-      setUsers(res.data);
-      setPage(+res.page);
-      setPerPage(+res.per_page);
-      setTotal(+res.total);
-      setTotalPage(+res.total_pages);
-    } else {
-      ToastUtils.error("Error");
+    setLoadingState((prev) => ({ ...prev, loading: true }));
+    try {
+      const res = (await UserService.getAll(
+        page
+      )) as unknown as IPage.PageResult<IUser.UserResponse>;
+
+      if (res && res.data) {
+        setUsers(res.data);
+        setPage(+res.page);
+        setPerPage(+res.per_page);
+        setTotal(+res.total);
+        setTotalPage(+res.total_pages);
+      } else {
+        ToastUtils.error("Error");
+      }
+    } catch {
+      ToastUtils.error("An error occurred while fetching users.");
+    } finally {
+      setLoadingState((prev) => ({ ...prev, loading: false }));
     }
-    setLoading(false);
   };
+
   return (
     <>
       <TableUserPresenter
@@ -68,7 +95,7 @@ const TableUserContainer = () => {
         userDetail={user}
         setTypeModal={setTypeModal}
         setUsers={setUsers}
-        isLoading={loading}
+        isLoading={loadingState}
       />
       <Pagination
         page={page}

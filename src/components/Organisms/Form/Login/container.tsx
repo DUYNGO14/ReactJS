@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IAuth, IContext } from "@/interfaces";
 import LoginPresenter from "./presenter";
 import { AuthService } from "@/services";
@@ -12,46 +12,48 @@ const LoginContainer = () => {
   });
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const { handleLogin } = useAuth() as unknown as IContext.UseAuthReturnType;
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const { handleLogin } = useAuth() as IContext.UseAuthReturnType;
+
+  const validateEmail = (email: string): boolean =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUser((prev) => ({ ...prev, [name]: value }));
+    setError(""); // Reset error khi người dùng nhập lại
   };
+
   const handleSubmitLogin = async () => {
     if (!user.email || !user.password) {
+      setError("Email and password are required");
       return;
     }
-    if (regex.test(user.email) === false) {
-      setError("Email is not valid");
+    if (!validateEmail(user.email)) {
+      setError("Invalid email format");
       return;
     }
     if (user.password.length < 6) {
       setError("Password must be at least 6 characters");
       return;
     }
+
     setLoading(true);
     try {
-      const response = await AuthService.login(user);
-      if (response && (response as unknown as IAuth.BaseAuthResponse).token) {
-        handleLogin(
-          user,
-          (response as unknown as IAuth.BaseAuthResponse).token
-        );
+      const response = (await AuthService.login(
+        user
+      )) as unknown as IAuth.BaseAuthResponse;
+      if (response && response.token) {
+        handleLogin(user, response.token);
       } else {
-        if (response && response.status === 400) {
-          setError("Password or email is incorrect 😒");
-        }
+        setError("Incorrect email or password");
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
+    } catch {
       ToastUtils.error("An error occurred during login 😩");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
-  useEffect(() => {
-    handleSubmitLogin();
-  }, []);
+
   return (
     <LoginPresenter
       user={user}

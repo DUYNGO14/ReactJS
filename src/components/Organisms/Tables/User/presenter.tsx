@@ -13,10 +13,10 @@ interface UserPresenterProps {
   toggle: (modalType?: string) => void;
   handleViewUser: (user: IUser.UserResponse) => void;
   typeModal: string;
-  userDetail: IUser.UserResponse | unknown;
+  userDetail: IUser.UserResponse | null;
   setTypeModal: React.Dispatch<React.SetStateAction<string>>;
   setUsers: React.Dispatch<React.SetStateAction<IUser.UserResponse[]>>;
-  isLoading: boolean;
+  isLoading: { loading: boolean; loadingModal: boolean };
 }
 
 const TableUserPresenter: React.FC<UserPresenterProps> = ({
@@ -49,10 +49,10 @@ const TableUserPresenter: React.FC<UserPresenterProps> = ({
             </Button>
           </Box>
         </Box>
-        {users.length === 0 && !isLoading && (
+        {users.length === 0 && !isLoading.loading && (
           <div className="flex justify-center items-center h-64">No data</div>
         )}
-        {isLoading ? (
+        {isLoading.loading ? (
           <div className="flex justify-center items-center h-64">
             <svg
               className="animate-spin h-10 w-10 text-indigo-600"

@@ -1,6 +1,6 @@
-import { IResource } from "../../../../interfaces"
-import { Box, Button } from "../../../Atoms"
-import { ModalDetail } from "../../Modal";
+import { IResource } from "@/interfaces"
+import { Box, Button } from "@/components/Atoms"
+import { ModalDetail } from "@/components/Organisms/Modal";
 
 
 interface UserPresenterProps {

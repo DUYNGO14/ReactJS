@@ -36,48 +36,59 @@ const UserFormContainer: React.FC<UserFormProps> = ({
         job: "",
       });
       setId(userData.id);
+    } else {
+      setUser(DEFAULT_USER_VALUE); // Reset form khi không có dữ liệu
+      setId(0);
     }
   }, [userData]);
-  const handleSubmit = async () => {
+
+  const handleCreateUser = async () => {
+    const res = (await UserService.create(
+      user
+    )) as unknown as IUser.UserCreateResponse;
+    if (res && res.id) {
+      const newUser = {
+        id: res.id,
+        email: `${res.name}_${res.job}@gmail.com`,
+        first_name: res.name,
+        last_name: res.name,
+        avatar: "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+      };
+      setUsers((prev) => [newUser, ...prev]);
+      toggle();
+      ToastUtils.success(`Create user with id:  ${res.id} successfully`);
+    } else {
+      ToastUtils.error("Create user failed");
+    }
+  };
+
+  const handleUpdateUser = async () => {
+    const res = (await UserService.update(
+      id,
+      user
+    )) as unknown as IUser.UserUpdateResponse;
+    if (res?.updatedAt) {
+      setUsers((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, first_name: user.name } : item
+        )
+      );
+      toggle();
+      ToastUtils.success(`Update user with id: ${id} successfully`);
+    } else {
+      ToastUtils.error("Update user failed");
+    }
+  };
+
+  const handleSubmit = () => {
     if (!user.name || !user.job) {
       ToastUtils.error("Please enter name and job");
       return;
     }
-    if (method === "update") {
-      const res = (await UserService.update(
-        id,
-        user
-      )) as unknown as IUser.UserUpdateResponse;
-      if (res && res.updatedAt) {
-        setUsers((prev) =>
-          prev.map((item) =>
-            item.id === id ? { ...item, first_name: user.name } : item
-          )
-        );
-        toggle();
-        ToastUtils.success(`Update user with id:  ${id} successfully`);
-      } else {
-        ToastUtils.error("Update user failed");
-      }
-    } else if (method === "create") {
-      const res = (await UserService.create(
-        user
-      )) as unknown as IUser.UserCreateResponse;
-      if (res && res.id) {
-        const newUser = {
-          id: res.id,
-          email: `${res.name}_${res.job}@gmail.com`,
-          first_name: res.name,
-          last_name: res.name,
-          avatar:
-            "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
-        };
-        setUsers((prev) => [newUser, ...prev]);
-        toggle();
-        ToastUtils.success(`Create user with id:  ${res.id} successfully`);
-      } else {
-        ToastUtils.error("Create user failed");
-      }
+    if (method === "create") {
+      handleCreateUser();
+    } else if (method === "update") {
+      handleUpdateUser();
     }
   };
 
