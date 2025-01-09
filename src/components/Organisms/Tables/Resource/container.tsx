@@ -15,15 +15,10 @@ const TableResourceContainer = () => {
     const [isShow , setIsShowing] = useState(false)
     const [resource, setResource] = useState<IResource.ResourceResponse|unknown>({})
     const [loading, setLoading] = useState<boolean>(false)
+
     useEffect(() => {
         getAllResources()
     },[page])
-
-    useEffect(() => {
-        if (resource && (resource as IResource.ResourceResponse).id) {
-          getResourceById(resource as IResource.ResourceResponse);
-        }
-      }, []);
       
     const getAllResources = async () => {
         setLoading(true)

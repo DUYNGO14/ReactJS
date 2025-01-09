@@ -33,13 +33,7 @@ const TableUserContainer = () => {
 
     return () => clearTimeout(fetchUsers); // Hủy debounce khi `page` thay đổi nhanh
   }, [page]);
-
-  useEffect(() => {
-    if (user && (user as IUser.UserResponse).id) {
-      handleViewUser(user as IUser.UserResponse);
-    }
-  }, []);
-
+  
   const handleViewUser = async (user: IUser.UserResponse) => {
     if (!user || !user.id) {
       return;
