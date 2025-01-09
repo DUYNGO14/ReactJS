@@ -1,7 +1,7 @@
 import LoginContainer from "./container";
 
 const LoginForm = () => {
-    return <LoginContainer />;
+  return <LoginContainer />;
 };
 
 export default LoginForm;

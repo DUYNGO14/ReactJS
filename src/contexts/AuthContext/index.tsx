@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { IAuth } from "../../interfaces"
-import { ToastUtils } from "../../utils";
+import { IAuth } from "@/interfaces"
+import { ToastUtils } from "@/utils";
 
 interface AuthContextType{
     user : IAuth.LoginRequest | null
@@ -42,6 +42,7 @@ const AuthProvider : React.FC<{children: React.ReactNode}> = ({ children } ) => 
         setToken(null)
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        ToastUtils.success('Logout successfully 🎉');
         navigate("/login");
     }
 

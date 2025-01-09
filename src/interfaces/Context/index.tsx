@@ -1,4 +1,4 @@
-import { IAuth } from "../../interfaces";
+import { IAuth } from "@/interfaces";
 
 interface UseAuthReturnType {
     user: IAuth.LoginRequest | null;
