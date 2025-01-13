@@ -1,11 +1,11 @@
 import { ResourcePage } from "../../components/Pages";
 
 function Resource() {
-    return (
-        <>
-            <ResourcePage/>
-        </>
-    );
+  return (
+    <>
+      <ResourcePage />
+    </>
+  );
 }
 
-export default Resource
+export default Resource;

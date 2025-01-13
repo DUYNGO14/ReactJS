@@ -1,12 +1,11 @@
-
-import { LoginForm } from "../../Organisms/Form"
+import { LoginForm } from "../../Organisms/Form";
 
 const LoginPage = () => {
-    return (
-        <>
-            <LoginForm />
-        </>
-    )
-}
+  return (
+    <>
+      <LoginForm />
+    </>
+  );
+};
 
-export default LoginPage
+export default LoginPage;

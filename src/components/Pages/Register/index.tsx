@@ -1,11 +1,10 @@
-
-import {  RegisterForm } from "../../Organisms/Form"
+import { RegisterForm } from "../../Organisms/Form";
 const RegisterPage = () => {
-    return (
-        <>
-            <RegisterForm />
-        </>
-    )
-}
+  return (
+    <>
+      <RegisterForm />
+    </>
+  );
+};
 
-export default RegisterPage
+export default RegisterPage;

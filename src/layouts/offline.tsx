@@ -1,4 +1,3 @@
-
 import { ReactNode } from "react";
 
 import { useOffline } from "../hooks";
@@ -8,9 +7,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   useOffline();
   return (
     <>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+      <AuthProvider>{children}</AuthProvider>
     </>
   );
 };

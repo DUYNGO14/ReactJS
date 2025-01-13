@@ -1,9 +1,7 @@
-import TableUserContainer from "./container"
+import TableUserContainer from "./container";
 
 const TableUser = () => {
-    return (
-        <TableUserContainer/>
-    )
-}
+  return <TableUserContainer />;
+};
 
-export default TableUser
+export default TableUser;

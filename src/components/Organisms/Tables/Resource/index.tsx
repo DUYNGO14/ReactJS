@@ -1,10 +1,7 @@
-import TableResourceContainer from "./container"
-
+import TableResourceContainer from "./container";
 
 const TableResource = () => {
-    return (
-        <TableResourceContainer/>
-    )
-}
+  return <TableResourceContainer />;
+};
 
-export default TableResource
+export default TableResource;

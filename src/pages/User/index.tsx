@@ -1,11 +1,11 @@
 import { UserPage } from "../../components/Pages";
 
 function User() {
-    return (
-        <>
-            <UserPage/>
-        </>
-    );
+  return (
+    <>
+      <UserPage />
+    </>
+  );
 }
 
-export default User
+export default User;

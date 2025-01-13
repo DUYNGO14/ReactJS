@@ -6,14 +6,22 @@ import { ToastUtils } from "@/utils";
 import { IUser, IPage } from "@/interfaces";
 import { usePagination } from "@/hooks";
 
-
 const TableUserContainer = () => {
   const [users, setUsers] = useState<IUser.UserResponse[]>([]);
-  const { page, setPage, per_page, setPerPage, total, setTotal, totalPage, setTotalPage } = usePagination();
+  const {
+    page,
+    setPage,
+    per_page,
+    setPerPage,
+    total,
+    setTotal,
+    totalPage,
+    setTotalPage,
+  } = usePagination();
   const [isShow, setIsShowing] = useState(false);
   const [user, setUser] = useState<IUser.UserResponse | null>(null);
   const [typeModal, setTypeModal] = useState<string>("");
-  
+
   const [loadingState, setLoadingState] = useState({
     loading: false,
     loadingModal: false,
@@ -25,7 +33,7 @@ const TableUserContainer = () => {
     setIsShowing(!isShow);
     if (modalType !== "view") setUser(null);
   };
-  
+
   useEffect(() => {
     const fetchUsers = setTimeout(() => {
       getAllUsers();
@@ -33,7 +41,7 @@ const TableUserContainer = () => {
 
     return () => clearTimeout(fetchUsers); // Hủy debounce khi `page` thay đổi nhanh
   }, [page]);
-  
+
   const handleViewUser = async (user: IUser.UserResponse) => {
     if (!user || !user.id) {
       return;
