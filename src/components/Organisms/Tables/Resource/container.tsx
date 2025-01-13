@@ -4,14 +4,12 @@ import TableResourcePresenter from "./presenter"
 import { Pagination } from "@/components/Molecules"
 import { ToastUtils } from "@/utils"
 import { IResource,IPage } from "@/interfaces"
+import { usePagination } from "@/hooks"
 
 
 const TableResourceContainer = () => {
     const [resources, setResources] = useState<IResource.ResourceResponse[]>([])
-    const [page, setPage] = useState<number>(1)
-    const [per_page, setPerPage] = useState<number>(0)
-    const [totalPage, setTotalPage] = useState<number>(0)
-    const [total, setTotal] = useState<number>(0)
+    const { page, setPage, per_page, setPerPage, total, setTotal, totalPage, setTotalPage } = usePagination()
     const [isShow , setIsShowing] = useState(false)
     const [resource, setResource] = useState<IResource.ResourceResponse|unknown>({})
     const [loading, setLoading] = useState<boolean>(false)

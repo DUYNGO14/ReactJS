@@ -1,7 +1,6 @@
 import { IUser } from "@/interfaces";
 import { UserForm } from "@/components/Organisms/Form";
-import ModalBlank from "../../ModalBlank";
-
+import ModalBlank from "@/components/Organisms/Modal/ModalBlank";
 interface ModalCreateProps {
   isShow: boolean;
   toggle: (typeModal?: string) => void;

@@ -1,4 +1,4 @@
-import { IUser } from "../../../../interfaces";
+import { IUser } from "@/interfaces";
 import UserFormContainer from "./container";
 interface UserFormContainerProps {
   userData: IUser.UserResponse ;

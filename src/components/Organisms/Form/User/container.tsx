@@ -23,6 +23,9 @@ const UserFormContainer: React.FC<UserFormProps> = ({
 }) => {
   const [user, setUser] = useState<IUser.UserRequest>(DEFAULT_USER_VALUE);
   const [id, setId] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(false);
+  console.log("isLoading", isLoading);
+  
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -43,6 +46,7 @@ const UserFormContainer: React.FC<UserFormProps> = ({
   }, [userData]);
 
   const handleCreateUser = async () => {
+    setIsLoading(true);
     const res = (await UserService.create(
       user
     )) as unknown as IUser.UserCreateResponse;
@@ -60,9 +64,11 @@ const UserFormContainer: React.FC<UserFormProps> = ({
     } else {
       ToastUtils.error("Create user failed");
     }
+    setIsLoading(false);
   };
 
   const handleUpdateUser = async () => {
+    setIsLoading(true);
     const res = (await UserService.update(
       id,
       user
@@ -78,6 +84,7 @@ const UserFormContainer: React.FC<UserFormProps> = ({
     } else {
       ToastUtils.error("Update user failed");
     }
+    setIsLoading(false);
   };
 
   const handleSubmit = () => {
@@ -94,6 +101,7 @@ const UserFormContainer: React.FC<UserFormProps> = ({
 
   return (
     <UserFormPresenter
+      isLoading={isLoading}
       user={user}
       setUser={setUser}
       handleChange={handleChange}

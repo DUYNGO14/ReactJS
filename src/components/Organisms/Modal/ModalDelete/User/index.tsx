@@ -1,9 +1,9 @@
 import {  useState } from "react";
-import { IUser } from "../../../../../interfaces";
-import { ToastUtils } from "../../../../../utils";
-import ModalBlank from "../../ModalBlank";
-import { Box, Button } from "../../../../Atoms";
-import { UserService } from "../../../../../services";
+import { IUser } from "@/interfaces";
+import { ToastUtils } from "@/utils";
+import ModalBlank from "@/components/Organisms/Modal/ModalBlank";
+import { Box, Button } from "@/components/Atoms";
+import { UserService } from "@/services";
 
 interface ModalUserDetailProps {
   user: IUser.UserResponse | unknown;

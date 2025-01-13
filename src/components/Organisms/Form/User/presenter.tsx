@@ -9,6 +9,7 @@ interface UserFormProps {
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
+  isLoading: boolean;
 }
 
 const UserFormPresenter: React.FC<UserFormProps> = ({
@@ -16,7 +17,9 @@ const UserFormPresenter: React.FC<UserFormProps> = ({
   toggle,
   handleChange,
   handleSubmit,
+  isLoading
 }) => {
+  console.log("isLoading", isLoading);
   return (
     <form className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-">
       <Box className="grid gap-4 mb-4 sm:grid-cols-1">
@@ -44,12 +47,14 @@ const UserFormPresenter: React.FC<UserFormProps> = ({
         </Box>
       </Box>
       <Box className="flex justify-end">
+       
         <Button
           type="button"
+          disabled={isLoading}
           onClick={handleSubmit}
           className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto mr-3"
         >
-          Confirm
+          {isLoading ? "Saving..." : "Save"}
         </Button>
         <Button
           type="button"

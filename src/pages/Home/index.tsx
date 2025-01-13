@@ -1,4 +1,4 @@
-import { HomePage } from "../../components/Pages";
+import { HomePage } from "@/components/Pages";
 
 function Home() {
     return (
