@@ -23,7 +23,7 @@ const TableResourceContainer = () => {
         const res = await ResourceService.getAll(page)  as unknown as IPage.PageResult<IResource.ResourceResponse>
         if(res && res.data) {
             setResources(res.data)
-            setPage(res.page)          
+            setPage(res.page)
             setPerPage(res.per_page)
             setTotal(res.total)
             setTotalPage(res.total_pages)
